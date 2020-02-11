@@ -12,20 +12,11 @@
     <link rel="stylesheet" href="{{URL::asset('/dist/css/AdminLTE.min.css')}}">
     <link rel="stylesheet" href="{{URL::asset('dist/css/skins/_all-skins.min.css')}}">
     @stack('customcss')
-
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 
 <body class="hold-transition skin-purple sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
-
         <header class="main-header">
             <!-- Logo -->
             <a href="#" class="logo">
@@ -39,36 +30,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-
                 <div class="navbar-custom-menu">
-                    {{-- <div class="pull-left">
-                        <form class="navbar-form navbar-left" action="/action_page.php">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">
-                                        <i class="glyphicon glyphicon-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div> --}}
                     <ul class="nav navbar-nav">
-
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="{{URL::asset('dist/img/user2-160x160.jpg')}}" class="user-image"
                                     alt="User Image">
-                                {{-- <span class="hidden-xs">{{ Auth::user()->name }}</span> --}}
+                                <span class="hidden-xs">{{ Auth::user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="user-header">
                                     <img src="{{URL::asset('dist/img/user2-160x160.jpg')}}" class="img-circle"
                                         alt="User Image">
                                     <p>
-                                        {{-- {{ Auth::user()->name }} --}}
-                                        {{-- <small>Member Since {{ Auth::user()->created_at->format('Y') }}</small>
-                                        --}}
+                                        {{ Auth::user()->name }}
+                                        <small>Member Since {{ Auth::user()->created_at->format('Y') }}</small>
                                     </p>
                                 </li>
                                 <li class="user-footer">
@@ -93,8 +69,6 @@
             </nav>
         </header>
 
-        <!-- =============================================== -->
-
         <!-- Left side column. contains the sidebar -->
         <aside class="main-sidebar">
             <!-- sidebar: style can be found in sidebar.less -->
@@ -105,7 +79,7 @@
                         <img src="{{URL::asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        {{-- <p>{{Auth::user()->name}}</p> --}}
+                        <p>{{Auth::user()->name}}</p>
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
                 </div>
@@ -127,7 +101,6 @@
                         <ul class="treeview-menu">
                             <li><a href="{{ route('data.users')}}"><i class="fa fa-user"></i>User</a></li>
                             <li><a href="{{ route('product.index')}}"><i class="fa fa-dropbox"></i>Product</a></li>
-                            {{-- <li><a href="#"><i class="fa fa-circle-o">Level One</i></a></li> --}}
                         </ul>
                     </li>
                     <li class="treeview">
@@ -140,9 +113,6 @@
             </section>
             <!-- /.sidebar -->
         </aside>
-
-        <!-- =============================================== -->
-
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -168,15 +138,14 @@
             <strong> <a href="#!">Simple :v</a></strong>
         </footer>
 
-
-        <!-- Add the sidebar's background. This div must be placed
-    immediately after the control sidebar -->
-        <div class="control-sidebar-bg"></div>
+        {{-- <div class="control-sidebar-bg"></div> --}}
     </div>
     <!-- ./wrapper -->
-
     <!-- jQuery 2.2.3 -->
-    <script src="{{URL::asset('/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+    {{-- <script src="{{URL::asset('/plugins/jQuery/jquery-2.2.3.min.js')}}"></script> --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> --}}
+    <script src="{{ URL::asset('/js/jq.js') }}"></script>
     <!-- Bootstrap 3.3.6 -->
     <script src="{{URL::asset('/bootstrap/js/bootstrap.min.js')}}"></script>
     <!-- SlimScroll -->
@@ -187,6 +156,10 @@
     <script src="{{URL::asset('/dist/js/app.min.js')}}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{URL::asset('/dist/js/demo.js')}}"></script>
+
+    <!-- JQuery 3.4.1 -->
+    {{-- <script src="{{ URL::asset('/js/jquery.js') }}"></script> --}}
+    {{-- <script src="{{ URL::asset('/js/jquery.min.js') }}"></script> --}}
 
     @stack('customscript')
 

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Web;
 
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
+use App\Models\Courier;
 use App\Models\DetailsTransaction;
 use App\Models\UserTransaction;
-use App\Models\App\Models\User;
+use App\Models\User;
+use App\Models\Product;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -26,7 +29,7 @@ class TransactionController extends Controller
         : $transactions->paginate(10);
         // $transactions = Transaction::with(['userRelations', 'detailTransaction'])->paginate(20);
         // dd($transactions);
-        return view('admin.transaction.index')->with(['transactions' => $transactions]);
+        return view('admin.master.transaction.index')->with(['transactions' => $transactions]);
     }
 
     /**
@@ -36,7 +39,12 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        return view('admin.transaction.create');
+        $products = Product::all();
+        $transactions = Transaction::latest()->first();
+        $user = User::all();
+        $courir = Courier::all();
+        // dd($products);
+        return view('admin.master.transaction.create',compact('transactions','products','user','courir'));
     }
 
     /**
@@ -51,18 +59,12 @@ class TransactionController extends Controller
         // dd($request->all);
         // DB::beginTransaction();
         DB::table('transactions')->insert([
-            'transaction_code' => $request->transaction_code,
+            'transaction_code' => $request->transaction_code, //Request transaction code
             'resi_code' => $request->resi_code,
             'kurir' => $request->kurir,
+            'destination' => $request->destination,
             'grandtotal' => $request->grandtotal,
-            // 'email_verified_at' => Carbon::now(),
-            // 'api_token' => str_random(18),
-            // 'is_admin' => (int)$request->is_admin,
-            // 'password' => bcrypt($request->password),
-            // 'remember_token' => str_random(10),
-            // 'created_at' => Carbon::now(),
-            // 'updated_at' => Carbon::now(),
-            // 'password' => $request->getPassword(Hash::make('password')),
+            'date_transaction' => Carbon::now(),
             ]);
             dd($request->all);
         // return redirect()->route('transaction.index');
@@ -79,7 +81,7 @@ class TransactionController extends Controller
 
         $transaction = DetailsTransaction::with('productRelation')->where('transaction_id', $id)->get();
         // dd($transaction);
-        return view('admin.transaction.detail')->with(['transaction' => $transaction]);
+        return view('admin.master.transaction.detail')->with(['transaction' => $transaction]);
     }
 
     /**

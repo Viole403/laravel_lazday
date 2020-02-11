@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\ImagesProduct;
+use Carbon\Carbon;
 use PhpParser\Node\Stmt\TryCatch;
 
 class ProductsController extends Controller
@@ -75,13 +76,15 @@ class ProductsController extends Controller
 
                     $columnsImage =[
                         "product_id" => $product->id,
-                        "images" => $path,
+                        "image" => $path,
+                        "created_at" => Carbon::now(),
+                        "updated_at" => Carbon::now()
                     ];
 
                     array_push($arrayImages,$columnsImage);
                 }
                 ImagesProduct::insert($arrayImages);
-                dd($request->all());
+                // dd($request->all());
             }
             DB::commit();
         } catch (\Exception $e) {
