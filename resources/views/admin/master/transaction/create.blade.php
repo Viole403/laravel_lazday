@@ -16,7 +16,7 @@
         box-sizing: border-box;
         margin: 0;
         outline: none;
-        padding: 10px;
+        /* padding: 10px; */
     }
     input[type="button"] {
         -webkit-appearance: button;
@@ -40,7 +40,7 @@
     .input-group .button-plus {
         font-weight: bold;
         height: 30px;
-        padding: 0;
+        /* padding: 0; */
         width: 38px;
         position: relative;
     }
@@ -180,12 +180,13 @@
                         <td> ${stock}</td>
                         <td>
                             <div class="input-group">
-                            <input type="button" value="-" class="button-minus" data-field="quantity">
-                            <input type="number" step="1" max="" value="1" name="quantity" class="quantity-field">
-                            <input type="button" value="+" class="button-plus" data-field="quantity">
+                                <input type="button" value="-" class="button-minus" data-field="quantity">
+                                <input type="number" step="1" max="" value="0" name="quantity" class="quantity-field">
+                                <input type="button" value="+" class="button-plus" data-field="quantity">
                             </div>
                         </td>
-                        <td><input type="text"></td>
+
+                        <td><input type="text"readonly class="form-control input-sm grandtotal"></td>
                         <td>
                             <a href="javascript:void(0)" onclick="$(this).find(':selected').submit()"
                                 class="btn btn-sm btn-danger"><span class="fa fa-trash"></span>
@@ -198,6 +199,45 @@
                     </tr>`;
             $("table tbody").append(row);
         });
+        // var hasil = 1 ;
+        $('body').on('click','.button-plus',function(e){
+            e.preventDefault();
+            var fieldName = $(e.target).data('field');
+            var parent = $(e.target).closest('div');
+            var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+            if (!isNaN(currentVal)) {
+                parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
+            } else {
+                parent.find('input[name=' + fieldName + ']').val(0);
+            }
+        });
+        $('body').on('click','.button-minus',function(e){
+            e.preventDefault();
+            var fieldName = $(e.target).data('field');
+            var parent = $(e.target).closest('div');
+            var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+            if (!isNaN(currentVal) && currentVal > 0) {
+                parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
+            } else {
+                parent.find('input[name=' + fieldName + ']').val(0);
+            }
+            // $('.quantity-field').val(hasil--);
+            // $('.grandtotal').val($('.quantity-field').val() * price);
+        });
+        $('body').on('click','.button-plus',function () {
+            // console.log($('.quantity-field').val());
+            $('.grandtotal').val($('.quantity-field').val() * price);
+        });
+        $('body').on('click','.button-minus',function () {
+            // console.log($('.quantity-field').val());
+            var hasil = $('.grandtotal').val($('.quantity-field').val() - price);
+            $('hasil') - price;
+        });
+        $('body').on('change','quantity-field',function() {
+            if (condition) {
+
+            }
+        })
     });
 </script>
 @endpush
